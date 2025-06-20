@@ -2,15 +2,9 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import {
-  Calendar,
-  MapPin,
-  TrendingUp,
-  Users,
-  Award,
-  Briefcase,
-} from "lucide-react";
-import { SectionHeader } from "../ui";
+import { Calendar, Users, Briefcase } from "lucide-react";
+import { SectionHeader, SectionContainer } from "../ui";
+import { ExperienceCard } from "../cards";
 
 export default function Experience() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -78,207 +72,138 @@ export default function Experience() {
   ];
 
   return (
-    <section
-      ref={containerRef}
+    <SectionContainer
       id="experience"
-      className="min-h-screen flex items-center justify-center bg-white dark:bg-black overflow-hidden"
+      backgroundClass="bg-white dark:bg-black"
+      maxWidth="xl"
     >
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6">
-        <div className="flex flex-col gap-24 py-20">
-          <SectionHeader
-            title="Career"
-            subtitle="Journey"
-            titleSize="xl"
-            description={
-              <>
-                각 단계에서의 성장과 도전을 통해
-                <br />
-                <strong className="font-medium text-gray-900 dark:text-white">
-                  더 나은 개발자가 되어가고 있습니다.
-                </strong>
-              </>
-            }
-            className="mb-24"
-          />
+      <SectionHeader
+        title="Career"
+        subtitle="Journey"
+        titleSize="xl"
+        description={
+          <>
+            각 단계에서의 성장과 도전을 통해
+            <br />
+            <strong className="font-medium text-gray-900 dark:text-white">
+              더 나은 개발자가 되어가고 있습니다.
+            </strong>
+          </>
+        }
+        className="mb-24"
+      />
 
-          {/* Timeline */}
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gray-200 dark:bg-gray-800 transform md:-translate-x-1/2">
-              <motion.div
-                style={{ height: lineHeight }}
-                className="w-full bg-gradient-to-b from-blue-500 via-purple-500 to-green-500"
-              />
-            </div>
-
-            {/* Experience Items */}
-            <div className="space-y-16 md:space-y-24">
-              {experiences.map((exp, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 80 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 1.0,
-                    delay: index * 0.2,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  viewport={{ once: true }}
-                  className={`relative flex flex-col md:flex-row items-start md:items-center ${
-                    index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                >
-                  {/* Timeline Dot */}
-                  <div className="absolute left-4 md:left-1/2 w-8 h-8 transform -translate-x-1/2 md:-translate-x-1/2 z-10">
-                    <div
-                      className={`w-full h-full rounded-full bg-gradient-to-r ${exp.color} shadow-apple-lg flex items-center justify-center`}
-                    >
-                      <Briefcase className="w-4 h-4 text-white" />
-                    </div>
-                  </div>
-
-                  {/* Content Card */}
-                  <div
-                    className={`w-full md:w-5/12 ml-16 md:ml-0 ${
-                      index % 2 === 0 ? "md:mr-16" : "md:ml-16"
-                    }`}
-                  >
-                    <motion.div
-                      whileHover={{ y: -8, scale: 1.02 }}
-                      className="bg-gray-50 dark:bg-gray-900 rounded-3xl p-8 shadow-apple hover:shadow-apple-lg transition-all duration-500 group"
-                    >
-                      <div className="flex flex-col gap-6">
-                        {/* Header */}
-                        <div className="flex flex-col gap-2">
-                          <div className="flex items-center space-x-2">
-                            <Calendar className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                            <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
-                              {exp.period}
-                            </span>
-                            <span className="px-2 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full">
-                              {exp.type}
-                            </span>
-                          </div>
-                          <h3 className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
-                            {exp.position}
-                          </h3>
-                          <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
-                            <span className="font-medium">{exp.company}</span>
-                            <span>•</span>
-                            <div className="flex items-center space-x-1">
-                              <MapPin className="w-3 h-3" />
-                              <span className="text-sm">{exp.location}</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Highlights */}
-                        <div className="flex flex-col gap-3">
-                          <div className="flex items-center space-x-2">
-                            <TrendingUp className="w-4 h-4 text-green-600 dark:text-green-400" />
-                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                              주요 성과
-                            </span>
-                          </div>
-                          <ul className="space-y-2">
-                            {exp.highlights.map((highlight, i) => (
-                              <li
-                                key={i}
-                                className="flex items-start space-x-2"
-                              >
-                                <Award className="w-3 h-3 text-yellow-500 mt-1 flex-shrink-0" />
-                                <span className="text-sm text-gray-600 dark:text-gray-300">
-                                  {highlight}
-                                </span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        {/* Technologies */}
-                        <div className="flex flex-col gap-3">
-                          <div className="flex items-center space-x-2">
-                            <Users className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                              기술 스택
-                            </span>
-                          </div>
-                          <div className="flex flex-wrap gap-2">
-                            {exp.technologies.map((tech, i) => (
-                              <span
-                                key={i}
-                                className="px-3 py-1 text-xs font-medium bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full border border-gray-200 dark:border-gray-700 group-hover:border-blue-300 dark:group-hover:border-blue-600 transition-colors duration-300"
-                              >
-                                {tech}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent dark:from-gray-800/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                    </motion.div>
-                  </div>
-
-                  {/* Spacer for Desktop */}
-                  <div className="hidden md:block w-5/12" />
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Summary Stats */}
+      {/* Timeline */}
+      <div className="relative">
+        {/* Timeline Line */}
+        <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gray-200 dark:bg-gray-800 transform md:-translate-x-1/2">
           <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true }}
-            className="mt-32 text-center"
-          >
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
-                  number: "3+",
-                  label: "Years Experience",
-                  icon: <Calendar className="w-6 h-6" />,
-                },
-                {
-                  number: "10+",
-                  label: "Projects Delivered",
-                  icon: <Briefcase className="w-6 h-6" />,
-                },
-                {
-                  number: "100K+",
-                  label: "Users Served",
-                  icon: <Users className="w-6 h-6" />,
-                },
-              ].map((stat, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="group"
+            style={{ height: lineHeight }}
+            className="w-full bg-gradient-to-b from-blue-500 via-purple-500 to-green-500"
+          />
+        </div>
+
+        {/* Experience Items */}
+        <div className="space-y-16 md:space-y-24">
+          {experiences.map((exp, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 80 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 1.0,
+                delay: index * 0.2,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              viewport={{ once: true }}
+              className={`relative flex flex-col md:flex-row items-start md:items-center ${
+                index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+              }`}
+            >
+              {/* Timeline Dot */}
+              <div className="absolute left-4 md:left-1/2 w-8 h-8 transform -translate-x-1/2 md:-translate-x-1/2 z-10">
+                <div
+                  className={`w-full h-full rounded-full bg-gradient-to-r ${exp.color} shadow-apple-lg flex items-center justify-center`}
                 >
-                  <div className="flex flex-col items-center gap-2">
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-500 text-white group-hover:scale-110 transition-transform duration-300">
-                      {stat.icon}
-                    </div>
-                    <div className="text-3xl font-bold text-gray-900 dark:text-white">
-                      {stat.number}
-                    </div>
-                    <div className="text-gray-600 dark:text-gray-300 font-medium">
-                      {stat.label}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+                  <Briefcase className="w-4 h-4 text-white" />
+                </div>
+              </div>
+
+              {/* Content Card */}
+              <div
+                className={`w-full md:w-5/12 ml-16 md:ml-0 ${
+                  index % 2 === 0 ? "md:mr-16" : "md:ml-16"
+                }`}
+              >
+                <ExperienceCard
+                  period={exp.period}
+                  company={exp.company}
+                  position={exp.position}
+                  location={exp.location}
+                  type={exp.type}
+                  highlights={exp.highlights}
+                  technologies={exp.technologies}
+                  color={exp.color}
+                  index={index}
+                />
+              </div>
+
+              {/* Spacer for Desktop */}
+              <div className="hidden md:block w-5/12" />
+            </motion.div>
+          ))}
         </div>
       </div>
-    </section>
+
+      {/* Summary Stats */}
+      <motion.div
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+        viewport={{ once: true }}
+        className="mt-32 text-center"
+      >
+        <div className="grid md:grid-cols-3 gap-8">
+          {[
+            {
+              number: "3+",
+              label: "Years Experience",
+              icon: <Calendar className="w-6 h-6" />,
+            },
+            {
+              number: "10+",
+              label: "Projects Delivered",
+              icon: <Briefcase className="w-6 h-6" />,
+            },
+            {
+              number: "100K+",
+              label: "Users Served",
+              icon: <Users className="w-6 h-6" />,
+            },
+          ].map((stat, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="group"
+            >
+              <div className="flex flex-col items-center gap-2">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-500 text-white group-hover:scale-110 transition-transform duration-300">
+                  {stat.icon}
+                </div>
+                <div className="text-3xl font-bold text-gray-900 dark:text-white">
+                  {stat.number}
+                </div>
+                <div className="text-gray-600 dark:text-gray-300 font-medium">
+                  {stat.label}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+    </SectionContainer>
   );
 }

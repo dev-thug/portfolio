@@ -56,7 +56,8 @@ export default function SectionContainer({
       className={`relative min-h-screen flex items-center justify-center ${bgClass} overflow-hidden ${className}`}
     >
       <div
-        className={`relative z-10 w-full ${maxWidthClasses[maxWidth]} mx-auto px-6`}
+        className={`relative z-10 w-full ${maxWidthClasses[maxWidth]} mx-auto `}
+        style={{ padding: "2rem 0" }}
       >
         <motion.div
           style={enableParallax ? { y, opacity } : {}}

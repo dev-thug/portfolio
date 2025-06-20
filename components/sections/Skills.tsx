@@ -14,7 +14,8 @@ import {
   BarChart3,
   Globe,
 } from "lucide-react";
-import { SectionHeader } from "../ui";
+import { SectionHeader, SectionContainer } from "../ui";
+import { SkillCard, SkillCategoryHeader } from "../cards";
 
 export default function Skills() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -109,153 +110,102 @@ export default function Skills() {
   ];
 
   return (
-    <section
-      ref={containerRef}
+    <SectionContainer
       id="skills"
-      className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black overflow-hidden"
+      backgroundClass="bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black"
     >
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6">
-        <div className="flex flex-col gap-24 py-20">
-          <SectionHeader
-            title="Core"
-            subtitle="Technologies"
-            titleSize="xl"
-            description={
-              <>
-                4년간의 경험으로 다져진 기술 스택으로
-                <br />
-                <strong className="font-medium text-gray-900 dark:text-white">
-                  안정적이고 확장 가능한 시스템을 구축합니다.
-                </strong>
-              </>
-            }
-            className="mb-24"
-          />
+      <SectionHeader
+        title="Core"
+        subtitle="Technologies"
+        titleSize="xl"
+        description={
+          <>
+            4년간의 경험으로 다져진 기술 스택으로
+            <br />
+            <strong className="font-medium text-gray-900 dark:text-white">
+              안정적이고 확장 가능한 시스템을 구축합니다.
+            </strong>
+          </>
+        }
+      />
 
-          {/* Skills Grid */}
-          <div className="space-y-32">
-            {skillCategories.map((category, categoryIndex) => (
-              <motion.div
-                key={category.title}
-                initial={{ opacity: 0, y: 80 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 1.0,
-                  delay: categoryIndex * 0.2,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                viewport={{ once: true }}
-                className="relative"
-              >
-                {/* Category Header */}
-                <div className="flex items-center justify-center mb-16">
-                  <motion.div style={{ y }} className="text-center">
-                    <div className="flex flex-col items-center gap-4">
-                      <div
-                        className={`inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-r ${category.gradient} text-white shadow-apple-lg`}
-                      >
-                        {category.icon}
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        <h3 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
-                          {category.title}
-                        </h3>
-                        <p className="text-lg text-gray-600 dark:text-gray-300 font-light">
-                          {category.subtitle}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                </div>
-
-                {/* Skills Cards */}
-                <div className="grid md:grid-cols-3 gap-8">
-                  {category.skills.map((skill, skillIndex) => (
-                    <motion.div
-                      key={skill.name}
-                      initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                      transition={{
-                        duration: 0.8,
-                        delay: skillIndex * 0.1,
-                        ease: [0.16, 1, 0.3, 1],
-                      }}
-                      viewport={{ once: true }}
-                      className="group relative bg-white/80 dark:bg-gray-900/80 backdrop-blur-apple rounded-3xl p-8 border border-gray-200/50 dark:border-gray-700/50 shadow-apple hover:shadow-apple-lg transition-all duration-500"
-                      whileHover={{ y: -8, scale: 1.02 }}
-                    >
-                      <div className="flex flex-col gap-6">
-                        {/* Skill Header */}
-                        <div className="flex items-center space-x-4">
-                          <div
-                            className={`p-3 rounded-2xl bg-gradient-to-r ${category.gradient} text-white group-hover:scale-110 transition-transform duration-300`}
-                          >
-                            {skill.icon}
-                          </div>
-                          <div>
-                            <h4 className="text-xl font-semibold text-gray-900 dark:text-white">
-                              {skill.name}
-                            </h4>
-                          </div>
-                        </div>
-
-                        {/* Skill Description */}
-                        <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                          {skill.description}
-                        </p>
-
-                        {/* Proficiency Bar */}
-                        <div className="space-y-2">
-                          <div className="flex justify-between items-center">
-                            <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                              숙련도
-                            </span>
-                            <span className="text-sm font-semibold text-gray-900 dark:text-white">
-                              {skill.proficiency}%
-                            </span>
-                          </div>
-                          <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                            <motion.div
-                              initial={{ width: 0 }}
-                              whileInView={{ width: `${skill.proficiency}%` }}
-                              transition={{
-                                duration: 1.5,
-                                delay: 0.5,
-                                ease: [0.16, 1, 0.3, 1],
-                              }}
-                              viewport={{ once: true }}
-                              className={`h-full bg-gradient-to-r ${category.gradient} rounded-full`}
-                            />
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Hover Effect */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent dark:from-gray-800/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Bottom CTA */}
+      {/* Skills Grid */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "100px",
+        }}
+      >
+        {skillCategories.map((category, categoryIndex) => (
           <motion.div
-            initial={{ opacity: 0, y: 60 }}
+            key={category.title}
+            initial={{ opacity: 0, y: 80 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+            transition={{
+              duration: 1.0,
+              delay: categoryIndex * 0.2,
+              ease: [0.16, 1, 0.3, 1],
+            }}
             viewport={{ once: true }}
-            className="text-center mt-32"
+            className="relative"
           >
-            <div className="inline-flex items-center space-x-3 px-8 py-4 bg-gray-100 dark:bg-gray-800 rounded-full">
-              <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-              <span className="text-gray-700 dark:text-gray-300 font-medium">
-                지속적인 학습과 기술 발전을 추구합니다
-              </span>
+            {/* Category Header */}
+            <SkillCategoryHeader
+              title={category.title}
+              subtitle={category.subtitle}
+              icon={category.icon}
+              gradient={category.gradient}
+              y={y}
+            />
+
+            {/* Skills Cards */}
+            <div
+              className="grid md:grid-cols-3"
+              style={{
+                gap: "32px",
+              }}
+            >
+              {category.skills.map((skill, skillIndex) => (
+                <SkillCard
+                  key={skill.name}
+                  name={skill.name}
+                  description={skill.description}
+                  proficiency={skill.proficiency}
+                  icon={skill.icon}
+                  gradient={category.gradient}
+                  index={skillIndex}
+                />
+              ))}
             </div>
           </motion.div>
-        </div>
+        ))}
       </div>
-    </section>
+
+      {/* Bottom CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+        viewport={{ once: true }}
+        className="text-center"
+        style={{
+          marginTop: "60px",
+        }}
+      >
+        <div
+          className="inline-flex items-center bg-gray-100 dark:bg-gray-800 rounded-full"
+          style={{
+            gap: "12px",
+            padding: "16px 32px",
+          }}
+        >
+          <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+          <span className="text-gray-700 dark:text-gray-300 font-medium">
+            지속적인 학습과 기술 발전을 추구합니다
+          </span>
+        </div>
+      </motion.div>
+    </SectionContainer>
   );
 }

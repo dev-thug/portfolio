@@ -8,6 +8,11 @@ export { default as SectionContainer } from "./SectionContainer";
 export { default as ScrollIndicator } from "./ScrollIndicator";
 export { default as TechBadge } from "./TechBadge";
 export { default as AnimatedCard } from "./AnimatedCard";
+export { default as BaseCard } from "./BaseCard";
+export { default as DeviceMockup } from "./DeviceMockup";
+export { default as ProjectMockupContent } from "./ProjectMockupContent";
+export { default as Badge } from "./Badge";
+export { default as BadgeGroup } from "./BadgeGroup";
 
 // Content Elements
 export { default as AnimatedText } from "./AnimatedText";

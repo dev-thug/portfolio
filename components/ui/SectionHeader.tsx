@@ -37,7 +37,7 @@ export default function SectionHeader({
     >
       <div className="flex flex-col gap-8">
         <motion.h2
-          className={`${titleSizes[titleSize]} font-bold tracking-tight`}
+          className={`${titleSizes[titleSize]} font-bold tracking-tight `}
           style={{ lineHeight: titleSize === "xl" ? "0.9" : "1.1" }}
         >
           {subtitle ? (
@@ -45,7 +45,7 @@ export default function SectionHeader({
               <span className="block text-gray-900 dark:text-white">
                 {title}
               </span>
-              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent ">
                 {subtitle}
               </span>
             </>

@@ -8,12 +8,14 @@ import {
   ScrollIndicator,
   BackgroundGrid,
   AnimatedText,
+  SectionContainer,
+  BadgeGroup,
 } from "../ui";
 
 const techStack = [
   {
     icon: <Code className="w-4 h-4" />,
-    label: "Java & Spring Boot",
+    label: "NodeJS & Python",
     color: "from-green-500 to-emerald-600",
   },
   {
@@ -39,14 +41,16 @@ export default function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section
-      ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-white via-gray-50/50 to-white dark:from-black dark:via-gray-900/50 dark:to-black"
+    <SectionContainer
+      id="hero"
+      backgroundClass="bg-gradient-to-b from-white via-gray-50/50 to-white dark:from-black dark:via-gray-900/50 dark:to-black"
+      enableParallax={false}
+      className="relative"
     >
       {/* Background Grid */}
       <BackgroundGrid />
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 text-center h-screen">
+      <div className="relative z-10 w-full mx-auto text-center h-screen">
         <motion.div
           style={{ y, opacity }}
           className="flex flex-col justify-evenly h-full py-20"
@@ -62,8 +66,8 @@ export default function Hero() {
             <span className="block text-gray-900 dark:text-white">
               Software
             </span>
-            <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
-              Architect
+            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
+              Engineer
             </span>
           </AnimatedText>
 
@@ -88,17 +92,26 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.0, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-wrap justify-center gap-4"
           >
-            {techStack.map((tech, index) => (
-              <TechBadge
-                key={tech.label}
-                icon={tech.icon}
-                label={tech.label}
-                color={tech.color}
-                index={index}
-              />
-            ))}
+            <BadgeGroup
+              alignment="center"
+              layout="wrap"
+              gap="16px"
+              responsive={true}
+              customStyle={{
+                justifyContent: "center",
+              }}
+            >
+              {techStack.map((tech, index) => (
+                <TechBadge
+                  key={tech.label}
+                  icon={tech.icon}
+                  label={tech.label}
+                  color={tech.color}
+                  index={index}
+                />
+              ))}
+            </BadgeGroup>
           </motion.div>
 
           {/* Scroll Indicator */}
@@ -108,6 +121,6 @@ export default function Hero() {
 
       {/* Ambient Light Effect */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-blue-500/5 via-purple-500/3 to-transparent dark:from-blue-400/10 dark:via-purple-400/5 rounded-full blur-3xl pointer-events-none" />
-    </section>
+    </SectionContainer>
   );
 }

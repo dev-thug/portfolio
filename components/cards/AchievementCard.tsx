@@ -33,19 +33,46 @@ export default function AchievementCard({
       viewport={{ once: true }}
       className="group"
     >
-      <div className="p-8 bg-white/80 dark:bg-gray-900/80 backdrop-blur-apple rounded-3xl border border-gray-200/50 dark:border-gray-700/50 shadow-apple hover:shadow-apple-lg transition-all duration-500 flex flex-col items-center gap-4">
+      <div
+        className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-apple rounded-3xl border border-gray-200/50 dark:border-gray-700/50 shadow-apple hover:shadow-apple-lg transition-all duration-500 flex flex-col items-center"
+        style={{
+          padding: "32px",
+          gap: "16px",
+        }}
+      >
         <IconContainer icon={icon} gradient={gradient} />
-        <div className="flex flex-col items-center gap-2 text-center">
+        <div
+          className="flex flex-col items-center text-center"
+          style={{
+            gap: "8px",
+          }}
+        >
           <div
-            className={`text-4xl md:text-5xl font-bold bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}
+            className={`font-bold bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}
+            style={{
+              fontSize: "2.5rem",
+              lineHeight: "1",
+            }}
           >
             {number}
           </div>
-          <h4 className="text-xl font-bold text-gray-900 dark:text-white">
+          <h4
+            className="font-bold text-gray-900 dark:text-white"
+            style={{
+              fontSize: "1.25rem",
+              lineHeight: "1.75rem",
+            }}
+          >
             {title}
           </h4>
         </div>
-        <p className="text-gray-600 dark:text-gray-300 text-center">
+        <p
+          className="text-gray-600 dark:text-gray-300 text-center"
+          style={{
+            fontSize: "1rem",
+            lineHeight: "1.5rem",
+          }}
+        >
           {description}
         </p>
       </div>

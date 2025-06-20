@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Code2,
   Server,
@@ -11,8 +11,7 @@ import {
   Target,
   Heart,
 } from "lucide-react";
-import { useRef } from "react";
-import { SectionHeader, BackgroundGrid } from "../ui";
+import { SectionHeader, BackgroundGrid, SectionContainer } from "../ui";
 import { ValueCard, ExpertiseCard, AchievementCard } from "../cards";
 
 const coreValues = [
@@ -94,119 +93,104 @@ const achievements = [
 ];
 
 export default function About() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], ["50px", "-50px"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
-
   return (
-    <section
-      ref={containerRef}
+    <SectionContainer
       id="about"
-      className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black overflow-hidden"
+      backgroundClass="bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black"
     >
       <BackgroundGrid size={32} />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6">
-        <motion.div
-          style={{ y, opacity }}
-          className="flex flex-col gap-24 py-20"
-        >
-          {/* Hero Section */}
-          <SectionHeader
-            title="About"
-            subtitle="Developer"
-            titleSize="xl"
-            description={
-              <>
-                사용자에게 가치를 전달하는 서비스를 만드는 것에 열정을 가진
-                개발자입니다.
-                <br />
-                <strong className="font-medium text-gray-900 dark:text-white">
-                  지속 가능한 시스템을 구축하고 팀과 함께 성장합니다.
-                </strong>
-              </>
-            }
-          />
+      {/* Hero Section */}
+      <SectionHeader
+        title="About"
+        subtitle="Hyunjoong"
+        titleSize="xl"
+        description={
+          <>
+            사용자에게 가치를 전달하는 서비스를 만드는 것에 열정을 가진
+            개발자입니다.
+            <br />
+            <strong className="font-medium text-gray-900 dark:text-white">
+              지속 가능한 시스템을 구축하고 팀과 함께 성장합니다.
+            </strong>
+          </>
+        }
+      />
 
-          {/* Core Values */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true }}
-          >
-            <SectionHeader title="개발 철학" className="mb-16" />
-            <div className="grid lg:grid-cols-3 gap-8">
-              {coreValues.map((value, index) => (
-                <ValueCard
-                  key={value.title}
-                  icon={value.icon}
-                  title={value.title}
-                  subtitle={value.subtitle}
-                  description={value.description}
-                  gradient={value.gradient}
-                  index={index}
-                />
-              ))}
-            </div>
-          </motion.div>
+      {/* Core Values */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+        viewport={{ once: true }}
+        className="flex flex-col gap-8"
+      >
+        <SectionHeader title="개발 철학" />
+        <div className="grid lg:grid-cols-3 gap-8">
+          {coreValues.map((value, index) => (
+            <ValueCard
+              key={value.title}
+              icon={value.icon}
+              title={value.title}
+              subtitle={value.subtitle}
+              description={value.description}
+              gradient={value.gradient}
+              index={index}
+            />
+          ))}
+        </div>
+      </motion.div>
 
-          {/* Technical Expertise */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true }}
-          >
-            <SectionHeader title="핵심 기술" className="mb-16" />
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {expertise.map((tech, index) => (
-                <ExpertiseCard
-                  key={tech.title}
-                  icon={tech.icon}
-                  title={tech.title}
-                  subtitle={tech.subtitle}
-                  skills={tech.skills}
-                  color={tech.color}
-                  index={index}
-                />
-              ))}
-            </div>
-          </motion.div>
+      {/* Technical Expertise */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+        viewport={{ once: true }}
+        className="flex flex-col gap-8"
+      >
+        <SectionHeader title="핵심 기술" className="mb-16" />
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {expertise.map((tech, index) => (
+            <ExpertiseCard
+              key={tech.title}
+              icon={tech.icon}
+              title={tech.title}
+              subtitle={tech.subtitle}
+              skills={tech.skills}
+              color={tech.color}
+              index={index}
+            />
+          ))}
+        </div>
+      </motion.div>
 
-          {/* Achievements */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            <SectionHeader title="주요 성과" className="mb-16" />
-            <div className="grid md:grid-cols-3 gap-8">
-              {achievements.map((achievement, index) => (
-                <AchievementCard
-                  key={achievement.title}
-                  icon={achievement.icon}
-                  number={achievement.number}
-                  title={achievement.title}
-                  description={achievement.description}
-                  index={index}
-                />
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
-      </div>
+      {/* Achievements */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+        viewport={{ once: true }}
+        className="flex flex-col gap-8"
+      >
+        <SectionHeader title="주요 성과" className="mb-16" />
+        <div className="grid md:grid-cols-3 gap-8">
+          {achievements.map((achievement, index) => (
+            <AchievementCard
+              key={achievement.title}
+              icon={achievement.icon}
+              number={achievement.number}
+              title={achievement.title}
+              description={achievement.description}
+              index={index}
+            />
+          ))}
+        </div>
+      </motion.div>
 
       {/* Ambient Light Effect */}
       <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-gradient-radial from-blue-500/5 via-purple-500/3 to-transparent dark:from-blue-400/10 dark:via-purple-400/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 left-0 w-[600px] h-[600px] bg-gradient-radial from-purple-500/5 via-blue-500/3 to-transparent dark:from-purple-400/10 dark:via-blue-400/5 rounded-full blur-3xl pointer-events-none" />
-    </section>
+    </SectionContainer>
   );
 }

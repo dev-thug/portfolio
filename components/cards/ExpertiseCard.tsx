@@ -35,19 +35,52 @@ export default function ExpertiseCard({
       whileHover={{ scale: 1.05, y: -5 }}
       className="group relative"
     >
-      <div className="h-full p-6 bg-white/80 dark:bg-gray-900/80 backdrop-blur-apple rounded-2xl border border-gray-200/50 dark:border-gray-700/50 shadow-apple hover:shadow-apple-lg transition-all duration-500 flex flex-col justify-between gap-4">
-        <div className="flex flex-col gap-3">
+      <div
+        className="h-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-apple rounded-2xl border border-gray-200/50 dark:border-gray-700/50 shadow-apple hover:shadow-apple-lg transition-all duration-500 flex flex-col justify-between"
+        style={{
+          padding: "24px",
+          gap: "16px",
+        }}
+      >
+        <div
+          className="flex flex-col"
+          style={{
+            gap: "12px",
+          }}
+        >
           <IconContainer icon={icon} gradient={color} size="md" />
-          <div className="flex flex-col gap-1">
-            <h4 className="text-xl font-bold text-gray-900 dark:text-white">
+          <div
+            className="flex flex-col"
+            style={{
+              gap: "4px",
+            }}
+          >
+            <h4
+              className="font-bold text-gray-900 dark:text-white"
+              style={{
+                fontSize: "1.25rem",
+                lineHeight: "1.75rem",
+              }}
+            >
               {title}
             </h4>
-            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 tracking-wide uppercase">
+            <p
+              className="font-medium text-gray-500 dark:text-gray-400 tracking-wide uppercase"
+              style={{
+                fontSize: "0.75rem",
+                lineHeight: "1rem",
+              }}
+            >
               {subtitle}
             </p>
           </div>
         </div>
-        <div className="flex flex-wrap gap-1">
+        <div
+          className="flex flex-wrap"
+          style={{
+            gap: "4px",
+          }}
+        >
           {skills.map((skill) => (
             <SkillTag key={skill} skill={skill} />
           ))}

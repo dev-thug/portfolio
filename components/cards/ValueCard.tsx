@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ReactNode } from "react";
 import IconContainer from "../ui/IconContainer";
+import BaseCard from "../ui/BaseCard";
 
 interface ValueCardProps {
   icon: ReactNode;
@@ -22,31 +22,48 @@ export default function ValueCard({
   index,
 }: ValueCardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.8,
-        delay: index * 0.2,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-      viewport={{ once: true }}
-      className="group relative"
+    <BaseCard
+      index={index}
+      delay={0.2}
+      padding="32px"
+      gap="16px"
+      gradient={gradient}
     >
-      <div className="h-full p-8 bg-white/80 dark:bg-gray-900/80 backdrop-blur-apple rounded-3xl border border-gray-200/50 dark:border-gray-700/50 shadow-apple hover:shadow-apple-lg transition-all duration-500 flex flex-col gap-4">
-        <IconContainer icon={icon} gradient={gradient} />
-        <div className="flex flex-col gap-2">
-          <h4 className="text-2xl font-bold text-gray-900 dark:text-white">
-            {title}
-          </h4>
-          <p className="text-sm font-medium text-gray-500 dark:text-gray-400 tracking-wide uppercase">
-            {subtitle}
-          </p>
-        </div>
-        <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-          {description}
+      <IconContainer icon={icon} gradient={gradient} />
+      <div
+        className="flex flex-col"
+        style={{
+          gap: "8px",
+        }}
+      >
+        <h4
+          className="font-bold text-gray-900 dark:text-white"
+          style={{
+            fontSize: "1.5rem",
+            lineHeight: "2rem",
+          }}
+        >
+          {title}
+        </h4>
+        <p
+          className="font-medium text-gray-500 dark:text-gray-400 tracking-wide uppercase"
+          style={{
+            fontSize: "0.875rem",
+            lineHeight: "1.25rem",
+          }}
+        >
+          {subtitle}
         </p>
       </div>
-    </motion.div>
+      <p
+        className="text-gray-600 dark:text-gray-300 leading-relaxed"
+        style={{
+          fontSize: "1rem",
+          lineHeight: "1.625",
+        }}
+      >
+        {description}
+      </p>
+    </BaseCard>
   );
 }

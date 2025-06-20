@@ -11,9 +11,17 @@ const variants = {
     "bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300",
 };
 
-const sizes = {
-  sm: "px-2 py-1 text-xs",
-  md: "px-3 py-1.5 text-sm",
+const sizeStyles = {
+  sm: {
+    padding: "4px 8px",
+    fontSize: "0.75rem",
+    lineHeight: "1rem",
+  },
+  md: {
+    padding: "6px 12px",
+    fontSize: "0.875rem",
+    lineHeight: "1.25rem",
+  },
 };
 
 export default function SkillTag({
@@ -23,7 +31,8 @@ export default function SkillTag({
 }: SkillTagProps) {
   return (
     <span
-      className={`${sizes[size]} ${variants[variant]} font-medium rounded-md inline-block`}
+      className={`${variants[variant]} font-medium rounded-md inline-block`}
+      style={sizeStyles[size]}
     >
       {skill}
     </span>
