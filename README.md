@@ -661,8 +661,8 @@ copies or substantial portions of the Software.
 
 ## 🙋‍♂️ 문의 및 지원
 
-- **Email**: hyunjoong.kim@example.com
-- **GitHub**: [@hyunjoongkim](https://github.com/hyunjoongkim)
+- **Email**: de0978@gmail.com
+- **GitHub**: [@dev-thug](https://github.com/dev-thug)
 - **LinkedIn**: [김현중](https://linkedin.com/in/hyunjoongkim)
 
 ---
@@ -673,7 +673,7 @@ copies or substantial portions of the Software.
 
 _Apple의 디자인 철학에서 영감을 받아 제작되었습니다._
 
-[![GitHub stars](https://img.shields.io/github/stars/your-username/portfolio?style=social)](https://github.com/your-username/portfolio)
-[![GitHub forks](https://img.shields.io/github/forks/your-username/portfolio?style=social)](https://github.com/your-username/portfolio)
+[![GitHub stars](https://img.shields.io/github/stars/your-username/portfolio?style=social)](https://github.com/dev-thug/portfolio)
+[![GitHub forks](https://img.shields.io/github/forks/your-username/portfolio?style=social)](https://github.com/dev-thug/portfolio)
 
 </div>
