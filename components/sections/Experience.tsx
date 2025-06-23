@@ -7,10 +7,11 @@ import { SectionHeader, SectionContainer } from "../ui";
 import { ExperienceCard } from "../cards";
 
 export default function Experience() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
+
   const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
+    target: timelineRef,
+    offset: ["start 0.7", "end 0.3"],
   });
 
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
@@ -94,17 +95,23 @@ export default function Experience() {
       />
 
       {/* Timeline */}
-      <div className="relative">
-        {/* Timeline Line */}
-        <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gray-200 dark:bg-gray-800 transform md:-translate-x-1/2">
+      <div className="relative" ref={timelineRef}>
+        {/* Timeline Line Background */}
+        <div className="absolute left-4 md:left-1/2 top-8 bottom-8 w-px bg-gray-200 dark:bg-gray-800 transform md:-translate-x-1/2" />
+
+        {/* Timeline Line Progress */}
+        <div className="absolute left-4 md:left-1/2 top-8 bottom-8 w-px transform md:-translate-x-1/2 overflow-hidden">
           <motion.div
-            style={{ height: lineHeight }}
-            className="w-full bg-gradient-to-b from-blue-500 via-purple-500 to-green-500"
+            className="w-full bg-gradient-to-b from-blue-500 via-purple-500 to-green-500 origin-top will-change-transform"
+            style={{
+              height: lineHeight,
+              filter: "drop-shadow(0 0 6px rgba(99, 102, 241, 0.4))",
+            }}
           />
         </div>
 
         {/* Experience Items */}
-        <div className="space-y-16 md:space-y-24">
+        <div className="space-y-16 md:space-y-24 relative py-8">
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
@@ -115,18 +122,29 @@ export default function Experience() {
                 delay: index * 0.2,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               className={`relative flex flex-col md:flex-row items-start md:items-center ${
                 index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
               }`}
             >
               {/* Timeline Dot */}
               <div className="absolute left-4 md:left-1/2 w-8 h-8 transform -translate-x-1/2 md:-translate-x-1/2 z-10">
-                <div
-                  className={`w-full h-full rounded-full bg-gradient-to-r ${exp.color} shadow-apple-lg flex items-center justify-center`}
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  whileHover={{ scale: 1.1 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: index * 0.2 + 0.3,
+                    type: "spring",
+                    stiffness: 200,
+                    damping: 15,
+                  }}
+                  viewport={{ once: true }}
+                  className={`w-full h-full rounded-full bg-gradient-to-r ${exp.color} shadow-apple-lg flex items-center justify-center ring-4 ring-white dark:ring-black transition-all duration-300 hover:shadow-xl`}
                 >
                   <Briefcase className="w-4 h-4 text-white" />
-                </div>
+                </motion.div>
               </div>
 
               {/* Content Card */}
