@@ -73,13 +73,13 @@ const expertise = [
 
 const achievements = [
   {
-    number: "40%",
+    number: "66.7%",
     title: "성능 개선",
     description: "캐싱 전략과 쿼리 최적화",
     icon: <Trophy className="w-8 h-8" />,
   },
   {
-    number: "10만+",
+    number: "1TB/s",
     title: "사용자 서비스",
     description: "대용량 트래픽 처리 경험",
     icon: <Users className="w-8 h-8" />,

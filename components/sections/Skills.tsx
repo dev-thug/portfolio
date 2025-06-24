@@ -12,7 +12,7 @@ import {
   Zap,
   Layers,
   BarChart3,
-  Globe,
+  // Globe,
 } from "lucide-react";
 import { SectionHeader, SectionContainer } from "../ui";
 import { SkillCard, SkillCategoryHeader } from "../cards";
@@ -28,80 +28,87 @@ export default function Skills() {
 
   const skillCategories = [
     {
-      title: "Backend Development",
-      subtitle: "서버 아키텍처의 핵심",
+      title: "Backend Development & Cloud Architecture",
+      subtitle: "확장성 있는 서버리스 아키텍처의 핵심",
       icon: <Server className="w-8 h-8" />,
       gradient: "from-blue-500 to-cyan-500",
       skills: [
         {
-          name: "Java & Spring Boot",
+          name: "AWS Amplify",
           description:
-            "엔터프라이즈급 애플리케이션을 위한 안정적인 백엔드 프레임워크",
+            "서버리스 풀스택 프레임워크 - GraphQL API, Cognito 인증, 실시간 구독",
           proficiency: 95,
+          icon: <Cloud className="w-5 h-5" />,
+        },
+        {
+          name: "GraphQL & AppSync",
+          description:
+            "실시간 데이터 동기화, Pub/Sub 패턴, 실시간 상태 추적 시스템 구현",
+          proficiency: 90,
           icon: <Code2 className="w-5 h-5" />,
         },
         {
-          name: "RESTful API Design",
-          description: "확장 가능하고 유지보수하기 쉬운 API 설계 및 구현",
-          proficiency: 92,
-          icon: <Globe className="w-5 h-5" />,
-        },
-        {
-          name: "Microservices Architecture",
-          description: "독립적이고 확장 가능한 서비스 단위로 시스템 분해",
-          proficiency: 88,
+          name: "Event-Driven Architecture",
+          description:
+            "AWS Lambda, SQS, SNS를 활용한 비동기 이벤트 처리 및 워크플로우 설계",
+          proficiency: 93,
           icon: <Layers className="w-5 h-5" />,
         },
       ],
     },
     {
-      title: "Database & Storage",
-      subtitle: "데이터의 안정적인 관리",
+      title: "NoSQL Database & Storage",
+      subtitle: "대용량 데이터 처리와 효율적인 저장",
       icon: <Database className="w-8 h-8" />,
       gradient: "from-green-500 to-emerald-500",
       skills: [
         {
-          name: "MySQL & PostgreSQL",
-          description: "관계형 데이터베이스 설계 및 쿼리 최적화",
-          proficiency: 90,
+          name: "Amazon DynamoDB",
+          description:
+            "GSI 인덱스 설계, 상태 기반 쿼리 최적화, 실시간 스트림 활용",
+          proficiency: 92,
           icon: <Database className="w-5 h-5" />,
         },
         {
-          name: "Redis & Caching",
-          description: "고성능 캐싱 전략으로 응답 시간 최적화",
-          proficiency: 85,
+          name: "Amazon S3 & Data Management",
+          description:
+            "대용량 파일 스토리지, Pre-signed URL, 파일 압축 시스템 구현",
+          proficiency: 89,
           icon: <Zap className="w-5 h-5" />,
         },
         {
-          name: "Data Modeling",
-          description: "비즈니스 요구사항을 반영한 효율적인 데이터 구조 설계",
-          proficiency: 87,
+          name: "Data Modeling & Access Patterns",
+          description:
+            "NoSQL 데이터 모델링, 상태 추적 테이블 설계, 인덱스 전략 수립",
+          proficiency: 88,
           icon: <BarChart3 className="w-5 h-5" />,
         },
       ],
     },
     {
-      title: "Cloud & DevOps",
-      subtitle: "인프라의 자동화와 확장성",
-      icon: <Cloud className="w-8 h-8" />,
+      title: "Container & Batch Processing",
+      subtitle: "대규모 병렬 처리와 인프라 자동화",
+      icon: <Layers className="w-8 h-8" />,
       gradient: "from-purple-500 to-violet-500",
       skills: [
         {
-          name: "AWS Services",
-          description: "EC2, RDS, Lambda, S3 등을 활용한 클라우드 인프라 구축",
-          proficiency: 88,
-          icon: <Cloud className="w-5 h-5" />,
-        },
-        {
-          name: "Docker & Kubernetes",
-          description: "컨테이너화된 애플리케이션 배포 및 오케스트레이션",
-          proficiency: 82,
+          name: "AWS Batch & Docker",
+          description:
+            "컨테이너화된 유전체 분석 파이프라인, ECR 이미지 관리, 병렬 처리",
+          proficiency: 91,
           icon: <Layers className="w-5 h-5" />,
         },
         {
-          name: "CI/CD Pipeline",
+          name: "AWS Lambda & Serverless",
           description:
-            "Jenkins, GitHub Actions를 통한 자동화된 배포 파이프라인",
+            "서버리스 PDF 생성, 이벤트 기반 처리, 실시간 상태 업데이트",
+          proficiency: 94,
+          icon: <Zap className="w-5 h-5" />,
+        },
+        {
+          name: "Infrastructure as Code",
+          description:
+            "AWS SAM, Terraform, CloudFormation, 환경별 배포, CI/CD 파이프라인 구성",
           proficiency: 85,
           icon: <GitBranch className="w-5 h-5" />,
         },
