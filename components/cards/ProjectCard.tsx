@@ -6,6 +6,7 @@ import { ReactNode } from "react";
 import ProjectMetricCard from "./ProjectMetricCard";
 import ProjectHighlights from "./ProjectHighlights";
 import { DeviceMockup, ProjectMockupContent, Badge, BadgeGroup } from "../ui";
+import { trackProjectClick, trackExternalLink } from "../GoogleAnalytics";
 
 interface ProjectMetric {
   icon: ReactNode;
@@ -199,6 +200,10 @@ export default function ProjectCard({
               href={github}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => {
+                trackProjectClick(title, "github");
+                trackExternalLink(github, `${title} GitHub`);
+              }}
               className="group flex items-center bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-semibold hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors shadow-apple-lg"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
@@ -220,6 +225,10 @@ export default function ProjectCard({
                 href={demo}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  trackProjectClick(title, "demo");
+                  trackExternalLink(demo, `${title} Demo`);
+                }}
                 className="group flex items-center border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-full font-semibold hover:border-gray-400 dark:hover:border-gray-500 transition-colors"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
