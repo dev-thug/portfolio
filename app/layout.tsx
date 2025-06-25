@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import StructuredData from "@/components/StructuredData";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -116,6 +117,13 @@ export default function RootLayout({
     <html lang="ko" className="scroll-smooth">
       <head>
         <StructuredData />
+        {/* Google AdSense */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4295120214669813"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
         <GoogleAnalytics trackingId="G-Q62SLZCHKP" />
