@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   Mail,
   Github,
@@ -18,6 +18,7 @@ import { SectionHeader, SectionContainer, MetricCard } from "../ui";
 import { ContactCard, FocusCard, CallToActionCard } from "../cards";
 
 export default function Contact() {
+  const prefersReduce = useReducedMotion();
   const contactInfo = [
     {
       icon: <Mail className="w-6 h-6" />,
@@ -148,7 +149,7 @@ export default function Contact() {
       {/* Stats Section */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        whileInView={prefersReduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
         transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
         viewport={{ once: true }}
         style={{
@@ -178,7 +179,7 @@ export default function Contact() {
       {/* Contact Methods */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        whileInView={prefersReduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
         transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
         viewport={{ once: true }}
         style={{
@@ -224,7 +225,7 @@ export default function Contact() {
       {/* Current Focus */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        whileInView={prefersReduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
         transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
         viewport={{ once: true }}
         style={{

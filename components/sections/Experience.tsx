@@ -1,6 +1,11 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
 import { useRef } from "react";
 import { Calendar, Users, Briefcase } from "lucide-react";
 import { SectionHeader, SectionContainer } from "../ui";
@@ -13,7 +18,7 @@ export default function Experience() {
     target: timelineRef,
     offset: ["start 0.7", "end 0.3"],
   });
-
+  const prefersReduce = useReducedMotion();
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   const experiences = [
@@ -104,7 +109,7 @@ export default function Experience() {
           <motion.div
             className="w-full bg-gradient-to-b from-blue-500 via-purple-500 to-green-500 origin-top will-change-transform"
             style={{
-              height: lineHeight,
+              height: prefersReduce ? "100%" : (lineHeight as unknown as any),
               filter: "drop-shadow(0 0 6px rgba(99, 102, 241, 0.4))",
             }}
           />

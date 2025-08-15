@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import StructuredData from "@/components/StructuredData";
-import GoogleAnalytics from "@/components/GoogleAnalytics";
 import Script from "next/script";
+import { GoogleAnalytics as GA } from "@next/third-parties/google";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -11,7 +11,17 @@ const inter = Inter({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://hyunjoong.kim"
+  ),
+  alternates: { canonical: "/" },
   title: {
     default:
       "김현중 | 4년차 풀스택 개발자 포트폴리오 | NodeJS Python AWS 전문가",
@@ -64,11 +74,11 @@ export const metadata: Metadata = {
     title: "김현중 | 4년차 풀스택 개발자 포트폴리오 | NodeJS Python AWS 전문가",
     description:
       "4년차 풀스택 개발자로서 NodeJS, Python, AWS를 활용한 클라우드 네이티브 앱 개발 전문가. 2000+ 유전체 분석 시스템, 10만+ 사용자 서비스 구축 경험.",
-    url: "https://hyunjoong.kim",
+    url: "/",
     siteName: "김현중 풀스택 개발자 포트폴리오",
     images: [
       {
-        url: "https://hyunjoong.kim/og-image.jpg",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "김현중 풀스택 개발자 포트폴리오 - 4년차 NodeJS Python AWS 전문가",
@@ -83,7 +93,7 @@ export const metadata: Metadata = {
     title: "김현중 | 4년차 풀스택 개발자 포트폴리오",
     description:
       "NodeJS, Python, AWS 전문가. 2000+ 유전체 분석 시스템, 10만+ 사용자 서비스 구축. MSA, 클라우드 네이티브 아키텍처 전문가.",
-    images: ["https://hyunjoong.kim/og-image.jpg"],
+    images: ["/opengraph-image"],
     creator: "@dev_thug",
     site: "@dev_thug",
   },
@@ -110,18 +120,20 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     title: "김현중 풀스택 개발자 포트폴리오",
-    statusBarStyle: "default",
+    statusBarStyle: "black-translucent",
   },
   applicationName: "김현중 풀스택 개발자 포트폴리오",
   referrer: "origin-when-cross-origin",
-  other: {
-    "mobile-web-app-capable": "yes",
-    "apple-mobile-web-app-status-bar-style": "black-translucent",
-    "apple-mobile-web-app-title": "김현중 개발자 포트폴리오",
-    "msapplication-TileColor": "#000000",
-    "msapplication-TileImage": "/icon-144x144.png",
-    "msapplication-config": "/browserconfig.xml",
+  formatDetection: { telephone: true, email: true, address: true },
+  icons: {
+    icon: [
+      { url: "/icon-32x32.png", sizes: "32x32" },
+      { url: "/icon-16x16.png", sizes: "16x16" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+    shortcut: ["/favicon.ico"],
   },
+  themeColor: "#000000",
 };
 
 export default function RootLayout({
@@ -133,6 +145,8 @@ export default function RootLayout({
     <html lang="ko" className="scroll-smooth">
       <head>
         <StructuredData />
+        {/* PWA manifest for browsers that prefer link tag */}
+        <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
         {/* Google AdSense - 소유권 검증을 위해 필수 */}
@@ -142,7 +156,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-        <GoogleAnalytics trackingId="G-Q62SLZCHKP" />
+        <GA gaId={process.env.NEXT_PUBLIC_GA_ID ?? "G-Q62SLZCHKP"} />
         {children}
       </body>
     </html>

@@ -1,6 +1,11 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
 import { useRef } from "react";
 import {
   Server,
@@ -23,8 +28,10 @@ export default function Skills() {
     target: containerRef,
     offset: ["start end", "end start"],
   });
-
-  const y = useTransform(scrollYProgress, [0, 1], ["50px", "-50px"]);
+  const prefersReduce = useReducedMotion();
+  const y = prefersReduce
+    ? (undefined as unknown as any)
+    : useTransform(scrollYProgress, [0, 1], ["50px", "-50px"]);
 
   const skillCategories = [
     {
@@ -163,7 +170,8 @@ export default function Skills() {
               subtitle={category.subtitle}
               icon={category.icon}
               gradient={category.gradient}
-              y={y}
+              // SkillCategoryHeader.y는 MotionValue<string> 타입이므로, reduce 모드에서는 0px 고정값 적용
+              y={(prefersReduce ? (undefined as unknown as any) : y) as any}
             />
 
             {/* Skills Cards */}

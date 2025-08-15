@@ -1,42 +1,14 @@
 "use client";
 
-import Script from "next/script";
+// 클라이언트 유틸 전용. 스크립트 주입은 @next/third-parties/google 사용
 
-interface GoogleAnalyticsProps {
-  trackingId: string;
-}
+export const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "G-Q62SLZCHKP";
 
 declare global {
   interface Window {
     gtag: (...args: unknown[]) => void;
     dataLayer: Record<string, unknown>[];
   }
-}
-
-export default function GoogleAnalytics({ trackingId }: GoogleAnalyticsProps) {
-  return (
-    <>
-      <Script
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${trackingId}`}
-      />
-      <Script
-        id="google-analytics"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${trackingId}', {
-              page_title: document.title,
-              page_location: window.location.href,
-            });
-          `,
-        }}
-      />
-    </>
-  );
 }
 
 // GA4 이벤트 추적 함수들
@@ -58,7 +30,7 @@ export const trackEvent = (
 // 페이지 뷰 추적
 export const trackPageView = (url: string, title: string) => {
   if (typeof window !== "undefined" && window.gtag) {
-    window.gtag("config", "G-Q62SLZCHKP", {
+    window.gtag("config", GA_ID, {
       page_title: title,
       page_location: url,
     });
@@ -94,3 +66,8 @@ export const trackExternalLink = (url: string, linkText: string) => {
 export const trackScrollDepth = (depth: number) => {
   trackEvent("scroll", "engagement", `${depth}%`, depth);
 };
+
+// 유지 호환: 컴포넌트 기본 내보내기 (더 이상 사용되지 않음)
+export default function GoogleAnalytics(): null {
+  return null;
+}

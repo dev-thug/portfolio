@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import useScrollTracking from "./hooks/useScrollTracking";
+import { trackPageView } from "./GoogleAnalytics";
+import { usePathname, useSearchParams } from "next/navigation";
 
 interface AnalyticsProviderProps {
   children: React.ReactNode;
@@ -13,15 +15,22 @@ export default function AnalyticsProvider({
   // Enable scroll tracking
   useScrollTracking();
 
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const isFirstRenderRef = useRef(true);
+
   useEffect(() => {
-    // Track initial page load
-    if (typeof window !== "undefined" && window.gtag) {
-      window.gtag("event", "page_view", {
-        page_title: document.title,
-        page_location: window.location.href,
-      });
+    // SPA 라우트 변경 시 page_view 추적 (초기 로드 중복 방지)
+    if (isFirstRenderRef.current) {
+      isFirstRenderRef.current = false;
+      return;
     }
-  }, []);
+    const query = searchParams?.toString();
+    const url = `${window.location.origin}${pathname}${
+      query ? `?${query}` : ""
+    }`;
+    trackPageView(url, document.title);
+  }, [pathname, searchParams]);
 
   return <>{children}</>;
 }

@@ -1,6 +1,11 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
 import { Code, Database, Cloud } from "lucide-react";
 import { useRef } from "react";
 import {
@@ -36,9 +41,13 @@ export default function Hero() {
     target: containerRef,
     offset: ["start start", "end start"],
   });
-
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const prefersReduce = useReducedMotion();
+  const y = prefersReduce
+    ? (undefined as unknown as any)
+    : useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const opacity = prefersReduce
+    ? 1
+    : (useTransform(scrollYProgress, [0, 0.8], [1, 0]) as unknown as any);
 
   return (
     <SectionContainer
@@ -52,7 +61,7 @@ export default function Hero() {
 
       <div className="relative z-10 w-full mx-auto text-center h-screen">
         <motion.div
-          style={{ y, opacity }}
+          style={prefersReduce ? undefined : { y, opacity }}
           className="flex flex-col justify-evenly h-full py-20"
         >
           {/* Headline */}
